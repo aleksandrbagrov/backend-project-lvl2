@@ -1,6 +1,7 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/aleksandrbagrov/backend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/aleksandrbagrov/backend-project-lvl2/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/dfc50c2d88cd46d069c1/maintainability)](https://codeclimate.com/github/aleksandrbagrov/backend-project-lvl2/progress/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/dfc50c2d88cd46d069c1/test_coverage)](https://codeclimate.com/github/aleksandrbagrov/backend-project-lvl2/progress/coverage)
 
 ### The result of the program on the example of two flat (only key-value) files: https://asciinema.org/a/UkA9UaCjqlAxF5dU4Coo8UN0Y
 
