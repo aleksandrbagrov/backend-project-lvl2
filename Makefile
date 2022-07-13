@@ -1,7 +1,7 @@
 run: 
 	bin/gendigg.js
 
-install-deps:
+install:
 	npm ci
 
 test:
