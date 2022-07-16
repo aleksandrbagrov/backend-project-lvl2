@@ -23,5 +23,8 @@
   "devDependencies": {
     "eslint": "^8.18.0",
     "jest": "^28.1.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
   }
 }
