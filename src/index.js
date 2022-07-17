@@ -2,14 +2,15 @@ import _ from 'lodash';
 import fs from 'node:fs';
 import path from 'node:path';
 
-const genDiff = (filepath1, filepath2) => {
-  const pathToFile1 = path.resolve(process.cwd(), filepath1);
-  const jsonTextFile1 = fs.readFileSync(pathToFile1, 'utf8');
-  const obj1 = JSON.parse(jsonTextFile1);
+const getObjectFromJson = (filepath) => {
+  const pathToFile = path.resolve(process.cwd(), filepath);
+  const jsonTextFile = fs.readFileSync(pathToFile, 'utf8');
+  return JSON.parse(jsonTextFile);
+};
 
-  const pathToFile2 = path.resolve(process.cwd(), filepath2);
-  const jsonTextFile2 = fs.readFileSync(pathToFile2, 'utf8');
-  const obj2 = JSON.parse(jsonTextFile2);
+const genDiff = (filepath1, filepath2) => {
+  const obj1 = getObjectFromJson(filepath1);
+  const obj2 = getObjectFromJson(filepath2);
 
   const keysObj1 = Object.keys(obj1);
   const keysObj2 = Object.keys(obj2);
@@ -38,8 +39,7 @@ const genDiff = (filepath1, filepath2) => {
     }
   }, '');
 
-  const resDiff = `{\n${resStr}}`;
-  return resDiff;
+  return `{\n${resStr}}`;
 };
 
 export default genDiff;
