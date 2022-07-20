@@ -15,10 +15,35 @@ const genDiff = (filepath1, filepath2) => {
   const keysObj1 = Object.keys(obj1);
   const keysObj2 = Object.keys(obj2);
   const diff1 = _.difference(keysObj1, keysObj2);
+  // const newdiff1 = diff1.map((item) => {  })
   const intersection = _.intersection(keysObj1, keysObj2);
   const diff2 = _.difference(keysObj2, keysObj1);
   const resArr = _.sortBy([...diff1, ...intersection, ...diff2]);
-  const resStr = resArr.reduce((acc, item) => {
+  const finArr = resArr.reduce((acc, item) => {
+    if (diff1.includes(item)) {
+      console.log(item);
+      acc.push(`- ${item.slice(0, item.length)}: ${obj1[item]}`);
+      return acc;
+    }
+    if (diff2.includes(item)) {
+      console.log(item);
+      acc.push(`+ ${item.slice(0, item.length)}: ${obj2[item]}`);
+      return acc;
+    }
+    if (intersection.includes(item)) {
+      console.log(item);
+      if (obj1[item] === obj2[item]) {
+        acc.push(`  ${item.slice(0, item.length)}: ${obj1[item]}`);
+        return acc;
+      } else {
+        acc.push(`- ${item.slice(0, item.length)}: ${obj1[item]}`);
+        acc.push(`+ ${item.slice(0, item.length)}: ${obj2[item]}`);
+        return acc;
+      }
+    }
+  }, []);
+  const resStr = finArr.join('\n  ');
+  /* const resStr = resArr.reduce((acc, item) => {
     if (diff1.includes(item)) {
       acc = acc + `  - ${item}: ${obj1[item]}\n`;
       return acc;
@@ -37,9 +62,9 @@ const genDiff = (filepath1, filepath2) => {
         return acc;
       }
     }
-  }, '');
+  }, ''); */
 
-  return `{\n${resStr}}`;
+  return `{\n  ${resStr}\n}`;
 };
 
 export default genDiff;
