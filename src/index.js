@@ -1,17 +1,18 @@
 import _ from 'lodash';
 import fs from 'node:fs';
 import path from 'node:path';
+import parsers from 'parsers.js';
 
-const getObjectFromJson = (filepath) => {
+const getObjectFromFile = (filepath) => {
   const pathToFile = path.resolve(process.cwd(), filepath);
-  const jsonTextFile = fs.readFileSync(pathToFile, 'utf8');
-  const typeOfFiles = pathToFile.substring(pathToFile.lastIndexOf('.') + 1);
-  return JSON.parse(jsonTextFile);
+  const TextFile = fs.readFileSync(pathToFile, 'utf8');
+  const typeOfFile = pathToFile.substring(pathToFile.lastIndexOf('.'));
+  return parsers(TextFile, typeOfFile);
 };
 
 const genDiff = (filepath1, filepath2) => {
-  const obj1 = getObjectFromJson(filepath1);
-  const obj2 = getObjectFromJson(filepath2);
+  const obj1 = getObjectFromFile(filepath1);
+  const obj2 = getObjectFromFile(filepath2);
 
   const keysObj1 = Object.keys(obj1);
   const keysObj2 = Object.keys(obj2);
