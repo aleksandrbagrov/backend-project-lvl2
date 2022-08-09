@@ -13,5 +13,5 @@ program
     console.log(genDiff(filepath1, filepath2));
   })
   .helpOption('-h, --help', 'output usage information')
-  .option('-f, --format <type>', 'output format')
+  .option('-f, --format <type>', 'output format', 'stylish')
   .parse(process.argv);

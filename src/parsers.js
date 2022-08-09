@@ -8,8 +8,6 @@ const parsers = (doc, extension) => {
       return yaml.load(doc);
     case '.yaml':
       return yaml.load(doc);
-    default:
-      break;
   }
 };
 
