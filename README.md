@@ -10,3 +10,6 @@
 
 ### The result of the program on the example of two flat (only key-value) yml(yaml) files: https://asciinema.org/a/0czjwAnoj4GY2Ae5vJLKQqo1C
 ![Asciinema - genDiff on the example of two plain (only key-value) yml(yaml) files](https://user-images.githubusercontent.com/101454330/180446379-e4e9ced6-274c-4497-ae89-392ba3570ac9.png)
+
+### Example of generation of differences for files with nested structures: https://asciinema.org/a/ivZcfFDEpMaZliVg2OL4RPB6q
+![Asciinema - Example of generation of differences for files with nested structures](https://user-images.githubusercontent.com/101454330/184117179-ff504444-0db3-43f8-a2ee-60fa6fbb7247.png)
