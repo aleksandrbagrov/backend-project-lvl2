@@ -11,7 +11,7 @@ const getDoc = (filepath) => {
 
 const getFileExtension = (filepath) => filepath.substring(filepath.lastIndexOf('.'));
 
-const genDiff = (filepath1, filepath2) => {
+const genDiff = (filepath1, filepath2, styleFormat) => {
   const obj1 = parsers(getDoc(filepath1), getFileExtension(filepath1));
   const obj2 = parsers(getDoc(filepath2), getFileExtension(filepath2));
 
@@ -52,8 +52,19 @@ const genDiff = (filepath1, filepath2) => {
     return resObj;
   };
 
-  const resStr = stylish(iter(obj1, obj2), ' ', 2);
-  return resStr;
+  const resStr = (style) => {
+    switch (style) {
+      case 'json':
+        return stylish(iter(obj1, obj2), ' ', 2);
+      case 'yml':
+        return stylish(iter(obj1, obj2), ' ', 2);
+      case 'yaml':
+        return stylish(iter(obj1, obj2), ' ', 2);
+      default:
+        return stylish(iter(obj1, obj2), ' ', 2);
+    }
+  };
+  return resStr(styleFormat);
 };
 
 export default genDiff;
