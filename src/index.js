@@ -2,8 +2,7 @@ import _ from 'lodash';
 import fs from 'node:fs';
 import path from 'node:path';
 import parsers from './parsers.js';
-import stylish from './formatters/stylish.js';
-import plain from './formatters/plain.js';
+import getFormatter from './formatters/index.js';
 
 const getDoc = (filepath) => {
   const pathToFile = path.resolve(process.cwd(), filepath);
@@ -53,19 +52,9 @@ const genDiff = (filepath1, filepath2, styleFormat) => {
     return resObj;
   };
 
-  const resStr = (style) => {
-    switch (style) {
-      case 'plain':
-        return plain(iter(obj1, obj2));
-      case 'yml':
-        return stylish(iter(obj1, obj2), ' ', 2);
-      case 'yaml':
-        return stylish(iter(obj1, obj2), ' ', 2);
-      default:
-        return stylish(iter(obj1, obj2), ' ', 2);
-    }
-  };
-  return resStr(styleFormat);
+  const resStr = iter(obj1, obj2);
+
+  return getFormatter(resStr, styleFormat);
 };
 
 export default genDiff;
