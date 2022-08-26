@@ -35,14 +35,30 @@ test('Flat Files Comparison - yml vs json', () => {
   expect(genDiff(path3, path2)).toEqual(readFile('expected.file.txt').trim());
 });
 
-test('Files comparison with recursive structure - json vs yaml', () => {
-  expect(genDiff(path5, path8)).toEqual(readFile('expected.recursivefile.txt').trim());
+test('Files with recursive structure comparison - json vs yaml', () => {
+  expect(genDiff(path5, path8)).toBe(readFile('expected.stylish.recursivefile.txt').trim());
 });
 
-test('Files comparison with recursive structure - json vs json', () => {
-  expect(genDiff(path5, path7)).toEqual(readFile('expected.recursivefile.txt').trim());
+test('Files with recursive structure comparison - json vs json', () => {
+  expect(genDiff(path5, path7)).toEqual(readFile('expected.stylish.recursivefile.txt').trim());
 });
 
-test('Files comparison with recursive structure - yml vs yaml', () => {
-  expect(genDiff(path6, path8)).toEqual(readFile('expected.recursivefile.txt').trim());
+test('Files with recursive structure comparison - yml vs yaml', () => {
+  expect(genDiff(path6, path8)).toEqual(readFile('expected.stylish.recursivefile.txt').trim());
+});
+
+test('Files with recursive structure comparison in plain format - json vs yaml', () => {
+  expect(genDiff(path5, path8, 'plain')).toBe(readFile('expected.plain.recursivefile.txt').trim());
+});
+
+test('Files with recursive structure comparison in plain format - json vs json', () => {
+  expect(genDiff(path5, path7, 'plain')).toEqual(
+    readFile('expected.plain.recursivefile.txt').trim()
+  );
+});
+
+test('Files with recursive structure comparison in plain format - yml vs yaml', () => {
+  expect(genDiff(path6, path8, 'plain')).toEqual(
+    readFile('expected.plain.recursivefile.txt').trim()
+  );
 });

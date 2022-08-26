@@ -2,7 +2,7 @@ import _ from 'lodash';
 import fs from 'node:fs';
 import path from 'node:path';
 import parsers from './parsers.js';
-import stylish from './formatter.js';
+import getFormatter from './formatters/index.js';
 
 const getDoc = (filepath) => {
   const pathToFile = path.resolve(process.cwd(), filepath);
@@ -11,7 +11,7 @@ const getDoc = (filepath) => {
 
 const getFileExtension = (filepath) => filepath.substring(filepath.lastIndexOf('.'));
 
-const genDiff = (filepath1, filepath2) => {
+const genDiff = (filepath1, filepath2, styleFormat) => {
   const obj1 = parsers(getDoc(filepath1), getFileExtension(filepath1));
   const obj2 = parsers(getDoc(filepath2), getFileExtension(filepath2));
 
@@ -52,8 +52,9 @@ const genDiff = (filepath1, filepath2) => {
     return resObj;
   };
 
-  const resStr = stylish(iter(obj1, obj2), ' ', 2);
-  return resStr;
+  const resStr = iter(obj1, obj2);
+
+  return getFormatter(resStr, styleFormat);
 };
 
 export default genDiff;
