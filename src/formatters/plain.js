@@ -2,17 +2,10 @@ import _ from 'lodash';
 
 const getFormattedValue = (value) => {
   const formattedValue = _.isObject(value) ? '[complex value]' : value;
-  if (typeof formattedValue === 'string') {
-    if (formattedValue !== '[complex value]') {
-      return `\x1b[31m'${formattedValue}'\x1b[0m`;
-    } else {
-      return formattedValue;
-    }
-  } else if (typeof formattedValue === 'boolean') {
-    return `\x1b[34m${formattedValue}\x1b[0m`;
-  } else {
-    return formattedValue;
+  if (typeof formattedValue === 'string' && formattedValue !== '[complex value]') {
+    return `'${formattedValue}'`;
   }
+  return formattedValue;
 };
 
 const plain = (object) => {
