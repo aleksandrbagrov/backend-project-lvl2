@@ -25,6 +25,8 @@
     "jest": "^28.1.2"
   },
   "dependencies": {
+    "@jest/globals": "^29.0.2",
+    "commander": "^9.4.0",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21"
   }

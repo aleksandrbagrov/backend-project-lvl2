@@ -8,7 +8,7 @@ const stylish = (object, replacer = ' ', spaceCount = 1) => {
     const bracketIndent = replacer.repeat(2 * spaceCount * (depth - 1));
     const entries = Object.entries(currObj);
     const line = entries.map(([key, value]) => `${indent}${key}: ${iter(value, depth + 1)}`);
-    return [`{`, ...line, `${bracketIndent}}`].join('\n');
+    return ['{', ...line, `${bracketIndent}}`].join('\n');
   };
   return iter(object, 1);
 };

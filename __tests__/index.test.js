@@ -34,7 +34,7 @@ const fixturesCombinations2 = [
 
 describe('Comparing configuration files', () => {
   test.each(fixturesCombinations1)(
-    `Comparing configuration files %s and %s in %s format and outputting the result in %s format`,
+    'Comparing configuration files %s and %s in %s format and outputting the result in %s format',
     (before, after, extension, format, result) => {
       const initialFile = getFixturePath(before.concat(extension));
       const finalFile = getFixturePath(after.concat(extension));
@@ -44,8 +44,8 @@ describe('Comparing configuration files', () => {
   );
 
   test.each(fixturesCombinations2)(
-    `Comparing configuration files %s and %s in %s format and outputting the result in %s format`,
-    (before, after, extension, format) => {
+    'Comparing configuration files %s and %s in %s format and outputting the result in %s format',
+    (before, after, extension) => {
       const initialFile = getFixturePath(before.concat(extension));
       const finalFile = getFixturePath(after.concat(extension));
       const genJson = genDiff(initialFile, finalFile, 'json');
