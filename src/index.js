@@ -19,18 +19,18 @@ const genDiff = (filepath1, filepath2, styleFormat) => {
     const keysObj1 = Object.keys(val1);
     const keysObj2 = Object.keys(val2);
 
-    const diff1 = _.difference(keysObj1, keysObj2);
+    const diff12 = _.difference(keysObj1, keysObj2);
     const intersection = _.intersection(keysObj1, keysObj2);
-    const diff2 = _.difference(keysObj2, keysObj1);
+    const diff21 = _.difference(keysObj2, keysObj1);
 
-    const resArr = _.sortBy([...diff1, ...intersection, ...diff2]);
+    const resArr = _.sortBy([...diff12, ...intersection, ...diff21]);
 
     const resObj = resArr.reduce((acc, item) => {
-      if (diff1.includes(item)) {
+      if (diff12.includes(item)) {
         acc[`- ${item}`] = _.isObject(val1[item]) ? iter(val1[item]) : val1[item];
         return acc;
       }
-      if (diff2.includes(item)) {
+      if (diff21.includes(item)) {
         acc[`+ ${item}`] = _.isObject(val2[item]) ? iter(val2[item]) : val2[item];
         return acc;
       }

@@ -31,7 +31,9 @@ const plain = (object) => {
       const path = pathKey.join('.');
       if (!Array.isArray(key)) {
         if (key.startsWith(' ')) {
-          _.isObject(value) ? acc.push(iter(value, pathKey)) : '';
+          if (_.isObject(value)) {
+            acc.push(iter(value, pathKey));
+          }
           pathKey.pop();
           return acc;
         }

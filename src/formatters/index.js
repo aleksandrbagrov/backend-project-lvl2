@@ -1,12 +1,14 @@
 import stylish from './stylish.js';
 import plain from './plain.js';
 
-const getFormatter = (str, formatterName) => {
+const getFormatter = (obj, formatterName) => {
   switch (formatterName) {
     case 'plain':
-      return plain(str);
+      return plain(obj);
+    case 'json':
+      return JSON.stringify(obj);
     default:
-      return stylish(str, ' ', 2);
+      return stylish(obj, ' ', 2);
   }
 };
 

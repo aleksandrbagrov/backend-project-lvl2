@@ -10,55 +10,46 @@ const __dirname = dirname(__filename);
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
-const path1 = getFixturePath('file1.json');
-const path2 = getFixturePath('file2.json');
-const path3 = getFixturePath('file1.yml');
-const path4 = getFixturePath('file2.yaml');
-const path5 = getFixturePath('file3.json');
-const path6 = getFixturePath('file3.yml');
-const path7 = getFixturePath('file4.json');
-const path8 = getFixturePath('file4.yaml');
 
-test('Flat Files Comparison - json vs json', () => {
-  expect(genDiff(path1, path2)).toEqual(readFile('expected.file.txt').trim());
-});
+const fixturesCombinations1 = [
+  ['file1', 'file2', '.json', 'stylish', 'expected.file.txt'],
+  ['file1', 'file2', '.yml', 'stylish', 'expected.file.txt'],
+  ['file1', 'file2', '.yaml', 'stylish', 'expected.file.txt'],
+  ['file3', 'file4', '.json', 'stylish', 'expected.stylish.recursivefile.txt'],
+  ['file3', 'file4', '.yml', 'stylish', 'expected.stylish.recursivefile.txt'],
+  ['file3', 'file4', '.yaml', 'stylish', 'expected.stylish.recursivefile.txt'],
+  ['file3', 'file4', '.json', 'plain', 'expected.plain.recursivefile.txt'],
+  ['file3', 'file4', '.yml', 'plain', 'expected.plain.recursivefile.txt'],
+  ['file3', 'file4', '.yaml', 'plain', 'expected.plain.recursivefile.txt'],
+];
 
-test('Flat Files Comparison - yml vs yaml', () => {
-  expect(genDiff(path3, path4)).toEqual(readFile('expected.file.txt').trim());
-});
+const fixturesCombinations2 = [
+  ['file1', 'file2', '.json', 'json'],
+  ['file1', 'file2', '.yml', 'json'],
+  ['file1', 'file2', '.yaml', 'json'],
+  ['file3', 'file4', '.json', 'json'],
+  ['file3', 'file4', '.yml', 'json'],
+  ['file3', 'file4', '.yaml', 'json'],
+];
 
-test('Flat Files Comparison - json vs yaml', () => {
-  expect(genDiff(path1, path4)).toEqual(readFile('expected.file.txt').trim());
-});
-
-test('Flat Files Comparison - yml vs json', () => {
-  expect(genDiff(path3, path2)).toEqual(readFile('expected.file.txt').trim());
-});
-
-test('Files with recursive structure comparison - json vs yaml', () => {
-  expect(genDiff(path5, path8)).toBe(readFile('expected.stylish.recursivefile.txt').trim());
-});
-
-test('Files with recursive structure comparison - json vs json', () => {
-  expect(genDiff(path5, path7)).toEqual(readFile('expected.stylish.recursivefile.txt').trim());
-});
-
-test('Files with recursive structure comparison - yml vs yaml', () => {
-  expect(genDiff(path6, path8)).toEqual(readFile('expected.stylish.recursivefile.txt').trim());
-});
-
-test('Files with recursive structure comparison in plain format - json vs yaml', () => {
-  expect(genDiff(path5, path8, 'plain')).toBe(readFile('expected.plain.recursivefile.txt').trim());
-});
-
-test('Files with recursive structure comparison in plain format - json vs json', () => {
-  expect(genDiff(path5, path7, 'plain')).toEqual(
-    readFile('expected.plain.recursivefile.txt').trim()
+describe('Comparing configuration files', () => {
+  test.each(fixturesCombinations1)(
+    `Comparing configuration files %s and %s in %s format and outputting the result in %s format`,
+    (before, after, extension, format, result) => {
+      const initialFile = getFixturePath(before.concat(extension));
+      const finalFile = getFixturePath(after.concat(extension));
+      const expectedDifference = readFile(result).trim();
+      expect(genDiff(initialFile, finalFile, format)).toEqual(expectedDifference);
+    }
   );
-});
 
-test('Files with recursive structure comparison in plain format - yml vs yaml', () => {
-  expect(genDiff(path6, path8, 'plain')).toEqual(
-    readFile('expected.plain.recursivefile.txt').trim()
+  test.each(fixturesCombinations2)(
+    `Comparing configuration files %s and %s in %s format and outputting the result in %s format`,
+    (before, after, extension, format) => {
+      const initialFile = getFixturePath(before.concat(extension));
+      const finalFile = getFixturePath(after.concat(extension));
+      const genJson = genDiff(initialFile, finalFile, 'json');
+      expect(() => JSON.parse(genJson)).not.toThrow();
+    }
   );
 });
