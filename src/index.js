@@ -26,26 +26,27 @@ const genDiff = (filepath1, filepath2, styleFormat) => {
     const resArr = _.sortBy([...diff12, ...intersection, ...diff21]);
 
     const resObj = resArr.reduce((acc, item) => {
+      const newAcc = acc;
       if (diff12.includes(item)) {
-        acc[`- ${item}`] = _.isObject(val1[item]) ? iter(val1[item]) : val1[item];
-        return acc;
+        newAcc[`- ${item}`] = _.isObject(val1[item]) ? iter(val1[item]) : val1[item];
+        return newAcc;
       }
       if (diff21.includes(item)) {
-        acc[`+ ${item}`] = _.isObject(val2[item]) ? iter(val2[item]) : val2[item];
-        return acc;
+        newAcc[`+ ${item}`] = _.isObject(val2[item]) ? iter(val2[item]) : val2[item];
+        return newAcc;
       }
       if (intersection.includes(item)) {
         if (_.isObject(val1[item]) && _.isObject(val2[item])) {
-          acc[`  ${item}`] = iter(val1[item], val2[item]);
-          return acc;
+          newAcc[`  ${item}`] = iter(val1[item], val2[item]);
+          return newAcc;
         }
         if (val1[item] === val2[item]) {
-          acc[`  ${item}`] = val1[item];
-          return acc;
+          newAcc[`  ${item}`] = val1[item];
+          return newAcc;
         }
-        acc[`- ${item}`] = _.isObject(val1[item]) ? iter(val1[item]) : val1[item];
-        acc[`+ ${item}`] = _.isObject(val2[item]) ? iter(val2[item]) : val2[item];
-        return acc;
+        newAcc[`- ${item}`] = _.isObject(val1[item]) ? iter(val1[item]) : val1[item];
+        newAcc[`+ ${item}`] = _.isObject(val2[item]) ? iter(val2[item]) : val2[item];
+        return newAcc;
       }
     }, {});
     return resObj;

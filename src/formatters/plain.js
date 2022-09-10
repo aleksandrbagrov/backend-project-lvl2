@@ -19,10 +19,9 @@ const plain = (object) => {
         acc.push(entries.slice(i, i + 2));
         entries.splice(i + 1, 1);
         return acc;
-      } else {
-        acc.push(entries[i]);
-        return acc;
       }
+      acc.push(entries[i]);
+      return acc;
     }, []);
 
     const linesArr = resEntries.reduce((acc, [key, value]) => {
