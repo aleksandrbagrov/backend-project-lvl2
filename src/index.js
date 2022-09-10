@@ -42,11 +42,10 @@ const genDiff = (filepath1, filepath2, styleFormat) => {
         if (val1[item] === val2[item]) {
           acc[`  ${item}`] = val1[item];
           return acc;
-        } else {
-          acc[`- ${item}`] = _.isObject(val1[item]) ? iter(val1[item]) : val1[item];
-          acc[`+ ${item}`] = _.isObject(val2[item]) ? iter(val2[item]) : val2[item];
-          return acc;
         }
+        acc[`- ${item}`] = _.isObject(val1[item]) ? iter(val1[item]) : val1[item];
+        acc[`+ ${item}`] = _.isObject(val2[item]) ? iter(val2[item]) : val2[item];
+        return acc;
       }
     }, {});
     return resObj;
