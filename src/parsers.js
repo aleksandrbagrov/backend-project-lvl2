@@ -6,7 +6,7 @@ const parsers = (doc, extension) => {
       return JSON.parse(doc);
     case '.yml':
       return yaml.load(doc);
-    case '.yaml':
+    default:
       return yaml.load(doc);
   }
 };

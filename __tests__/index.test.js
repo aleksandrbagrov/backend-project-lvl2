@@ -40,7 +40,7 @@ describe('Comparing configuration files', () => {
       const finalFile = getFixturePath(after.concat(extension));
       const expectedDifference = readFile(result).trim();
       expect(genDiff(initialFile, finalFile, format)).toEqual(expectedDifference);
-    }
+    },
   );
 
   test.each(fixturesCombinations2)(
@@ -50,6 +50,6 @@ describe('Comparing configuration files', () => {
       const finalFile = getFixturePath(after.concat(extension));
       const genJson = genDiff(initialFile, finalFile, 'json');
       expect(() => JSON.parse(genJson)).not.toThrow();
-    }
+    },
   );
 });

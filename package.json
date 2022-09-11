@@ -22,11 +22,14 @@
   "homepage": "https://github.com/aleksandrbagrov/backend-project-lvl2#readme",
   "devDependencies": {
     "eslint": "^8.18.0",
+    "eslint-plugin-fp": "^2.3.0",
+    "eslint-plugin-jest": "^27.0.4",
     "jest": "^28.1.2"
   },
   "dependencies": {
     "@jest/globals": "^29.0.2",
     "commander": "^9.4.0",
+    "eslint-config-airbnb": "^19.0.4",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21"
   }
