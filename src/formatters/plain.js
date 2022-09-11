@@ -15,27 +15,14 @@ const plain = (object) => {
     const entries = Object.entries(currObj);
 
     const resEntries = entries.reduce((acc, item, i) => {
-      // console.log(`acc      = ${acc}`);
-      // console.log(`Entry  i = ${item}`);
-      // console.log(`Enty i+1 = ${entries[i + 1]}`);
       if (i + 1 < entries.length && item[0].slice(2) === entries[i + 1][0].slice(2)) {
-        // const newAcc = acc.concat(entries[i], entries[i + 1]);
-        // console.log(`newAcc = ${newAcc}`);
-        // const newAcc = acc.concat(entries.slice(i, i + 2));
-        acc.push(entries.slice(i, i + 2));
+        const newItem = entries.slice(i, i + 2);
         entries.splice(i + 1, 1);
-        return acc;
-        // return newAcc;
+        return [...acc, newItem];
       }
-      // const newAcc1 = acc.concat(item);
-      // console.log(`newAcc = ${newAcc1}`);
-      acc.push(item);
-      return acc;
-      // return newAcc1;
+      const newItem1 = item;
+      return [...acc, newItem1];
     }, []);
-
-    // console.log(`ResEntries = ${JSON.stringify(resEntries)}`);
-    // console.log(typeof resEntries);
 
     const linesArr = resEntries.reduce((acc, [key, value]) => {
       const currentKey = Array.isArray(key) ? key[0].slice(2) : key.slice(2);
