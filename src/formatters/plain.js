@@ -26,38 +26,38 @@ const plain = (object) => {
 
     const linesArr = resEntries.reduce((acc, [key, value]) => {
       const currentKey = Array.isArray(key) ? key[0].slice(2) : key.slice(2);
-      pathKey.push(currentKey);
-      const path = pathKey.join('.');
+      const newPathKey = `${pathKey}.${currentKey}`;
       if (!Array.isArray(key)) {
         if (key.startsWith(' ')) {
           if (_.isObject(value)) {
-            acc.push(iter(value, pathKey));
+            acc.push(iter(value, newPathKey));
           }
         }
         if (key.startsWith('-')) {
-          acc.push(`Property ${getFormattedValue(path)} was removed`);
+          acc.push(`Property ${getFormattedValue(newPathKey.slice(1))} was removed`);
         }
         if (key.startsWith('+')) {
           acc.push(
-            `Property ${getFormattedValue(path)} was added with value: ${getFormattedValue(value)}`
+            `Property ${getFormattedValue(
+              newPathKey.slice(1),
+            )} was added with value: ${getFormattedValue(value)}`,
           );
         }
       }
       if (Array.isArray(key)) {
         acc.push(
-          `Property ${getFormattedValue(path)} was updated. From ${getFormattedValue(
-            key[1]
-          )} to ${getFormattedValue(value[1])}`
+          `Property ${getFormattedValue(newPathKey.slice(1))} was updated. From ${getFormattedValue(
+            key[1],
+          )} to ${getFormattedValue(value[1])}`,
         );
       }
-      pathKey.pop();
       return acc;
     }, []);
 
     return linesArr.join('\n');
   };
 
-  return iter(object, []);
+  return iter(object, '');
 };
 
 export default plain;
