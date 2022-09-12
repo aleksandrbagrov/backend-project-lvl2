@@ -30,26 +30,28 @@ const plain = (object) => {
       if (!Array.isArray(key)) {
         if (key.startsWith(' ')) {
           if (_.isObject(value)) {
-            acc.push(iter(value, newPathKey));
+            return [...acc, iter(value, newPathKey)];
           }
         }
         if (key.startsWith('-')) {
-          acc.push(`Property ${getFormattedValue(newPathKey.slice(1))} was removed`);
+          return [...acc, `Property ${getFormattedValue(newPathKey.slice(1))} was removed`];
         }
         if (key.startsWith('+')) {
-          acc.push(
+          return [
+            ...acc,
             `Property ${getFormattedValue(
               newPathKey.slice(1),
             )} was added with value: ${getFormattedValue(value)}`,
-          );
+          ];
         }
       }
       if (Array.isArray(key)) {
-        acc.push(
+        return [
+          ...acc,
           `Property ${getFormattedValue(newPathKey.slice(1))} was updated. From ${getFormattedValue(
             key[1],
           )} to ${getFormattedValue(value[1])}`,
-        );
+        ];
       }
       return acc;
     }, []);
