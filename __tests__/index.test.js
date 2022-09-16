@@ -10,10 +10,17 @@ const __dirname = dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
+const fixturesCombinations = [
+  ['file3', 'file4', '.json', 'expected.stylish.recursivefile.txt'],
+  ['file3', 'file4', '.yml', 'expected.stylish.recursivefile.txt'],
+  ['file3', 'file4', '.yaml', 'expected.stylish.recursivefile.txt'],
+];
+
 const fixturesCombinations1 = [
   ['file1', 'file2', '.json', 'stylish', 'expected.file.txt'],
   ['file1', 'file2', '.yml', 'stylish', 'expected.file.txt'],
   ['file1', 'file2', '.yaml', 'stylish', 'expected.file.txt'],
+  ['file3', 'file4', '.json',, 'expected.stylish.recursivefile.txt'],
   ['file3', 'file4', '.json', 'stylish', 'expected.stylish.recursivefile.txt'],
   ['file3', 'file4', '.yml', 'stylish', 'expected.stylish.recursivefile.txt'],
   ['file3', 'file4', '.yaml', 'stylish', 'expected.stylish.recursivefile.txt'],
@@ -32,6 +39,16 @@ const fixturesCombinations2 = [
 ];
 
 describe('Comparing configuration files', () => {
+  test.each(fixturesCombinations)(
+    'Comparing configuration files %s and %s in %s format and outputting the result in %s format',
+    (before, after, extension, result) => {
+      const initialFile = getFixturePath(before.concat(extension));
+      const finalFile = getFixturePath(after.concat(extension));
+      const expectedDifference = readFile(result).trim();
+      expect(genDiff(initialFile, finalFile)).toEqual(expectedDifference);
+    },
+  );
+
   test.each(fixturesCombinations1)(
     'Comparing configuration files %s and %s in %s format and outputting the result in %s format',
     (before, after, extension, format, result) => {

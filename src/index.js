@@ -16,7 +16,7 @@ const getDoc = (filepath) => {
 
 const getFileExtension = (filepath) => filepath.substring(filepath.lastIndexOf('.')).slice(1);
 
-const genDiff = (filepath1, filepath2, styleFormat) => {
+const genDiff = (filepath1, filepath2, styleFormat = 'stylish') => {
   const doc1 = getDoc(filepath1);
   const obj1 = parsers(doc1, getFileExtension(filepath1));
   const doc2 = getDoc(filepath2);
