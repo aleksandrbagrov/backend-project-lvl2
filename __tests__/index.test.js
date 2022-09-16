@@ -20,7 +20,6 @@ const fixturesCombinations1 = [
   ['file1', 'file2', '.json', 'stylish', 'expected.file.txt'],
   ['file1', 'file2', '.yml', 'stylish', 'expected.file.txt'],
   ['file1', 'file2', '.yaml', 'stylish', 'expected.file.txt'],
-  ['file3', 'file4', '.json',, 'expected.stylish.recursivefile.txt'],
   ['file3', 'file4', '.json', 'stylish', 'expected.stylish.recursivefile.txt'],
   ['file3', 'file4', '.yml', 'stylish', 'expected.stylish.recursivefile.txt'],
   ['file3', 'file4', '.yaml', 'stylish', 'expected.stylish.recursivefile.txt'],
