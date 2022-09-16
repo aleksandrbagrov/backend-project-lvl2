@@ -38,7 +38,7 @@ Compares two configuration files and shows a difference.
 
 Options:
   -V, --version        output the version number
-  -f, --format <type>  output format (choice: stylish, plain, json   default: stylish)
+  -f, --format <type>  output format (choice: "stylish", "plain", "json") (default: "stylish")
   -h, --help           output usage information
 ```
 
