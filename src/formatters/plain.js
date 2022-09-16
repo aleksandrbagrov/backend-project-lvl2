@@ -17,8 +17,10 @@ const plain = (object) => {
     const resEntries = entries.reduce((acc, item, i) => {
       if (i + 1 < entries.length && item[0].slice(2) === entries[i + 1][0].slice(2)) {
         const newItem = entries.slice(i, i + 2);
-        entries.splice(i + 1, 1);
         return [...acc, newItem];
+      }
+      if (i - 1 >= 0 && item[0].slice(2) === entries[i - 1][0].slice(2)) {
+        return acc;
       }
       const newItem1 = item;
       return [...acc, newItem1];
