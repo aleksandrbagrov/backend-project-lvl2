@@ -13,7 +13,7 @@ const getFormatter = (obj, formatterName) => {
       default:
         throw new SyntaxError(`"${formatterName}" format is not supported`);
     }
-  } catch(err) {
+  } catch (err) {
     return console.log(err.message);
   }
 };
