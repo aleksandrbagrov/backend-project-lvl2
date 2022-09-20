@@ -4,27 +4,23 @@ import parsers from './parsers.js';
 import getFormatter from './formatters/index.js';
 import createDiffObject from './create_object.js';
 
-const getDoc = (filepath) => {
-  const pathToFile = path.resolve(process.cwd(), filepath);
-  try {
-    const doc = fs.readFileSync(pathToFile, 'utf8');
-    return doc;
-  } catch {
-    return console.log(`File ${pathToFile} does not exist`);
-  }
-};
+const absolutePath = (filepath) => path.resolve(process.cwd(), filepath);
+
+const getDoc = (pathToFile) => fs.readFileSync(pathToFile, 'utf8');
 
 const getFileExtension = (filepath) => filepath.substring(filepath.lastIndexOf('.')).slice(1);
 
 const genDiff = (filepath1, filepath2, styleFormat = 'stylish') => {
-  const doc1 = getDoc(filepath1);
+  const absolutePath1 = absolutePath(filepath1);
+  const doc1 = getDoc(absolutePath1);
   const obj1 = parsers(doc1, getFileExtension(filepath1));
-  const doc2 = getDoc(filepath2);
+  const absolutePath2 = absolutePath(filepath2);
+  const doc2 = getDoc(absolutePath2);
   const obj2 = parsers(doc2, getFileExtension(filepath2));
 
-  const resStr = createDiffObject(obj1, obj2);
+  const diffObject = createDiffObject(obj1, obj2);
 
-  return getFormatter(resStr, styleFormat);
+  return getFormatter(diffObject, styleFormat);
 };
 
 export default genDiff;

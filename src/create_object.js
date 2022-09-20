@@ -25,25 +25,22 @@ const createDiffObject = (obj1, obj2 = obj1) => {
       const newAcc = { ...acc, ...newProperty };
       return newAcc;
     }
-    if (intersection.includes(item)) {
-      if (_.isObject(obj1[item]) && _.isObject(obj2[item])) {
-        const newProperty = { [`  ${item}`]: createDiffObject(obj1[item], obj2[item]) };
-        const newAcc = { ...acc, ...newProperty };
-        return newAcc;
-      }
-      if (obj1[item] === obj2[item]) {
-        const newProperty = { [`  ${item}`]: obj1[item] };
-        const newAcc = { ...acc, ...newProperty };
-        return newAcc;
-      }
-      const newProperty = {
-        [`- ${item}`]: _.isObject(obj1[item]) ? createDiffObject(obj1[item]) : obj1[item],
-        [`+ ${item}`]: _.isObject(obj2[item]) ? createDiffObject(obj2[item]) : obj2[item],
-      };
+    if (_.isObject(obj1[item]) && _.isObject(obj2[item])) {
+      const newProperty = { [`  ${item}`]: createDiffObject(obj1[item], obj2[item]) };
       const newAcc = { ...acc, ...newProperty };
       return newAcc;
     }
-    return acc;
+    if (obj1[item] === obj2[item]) {
+      const newProperty = { [`  ${item}`]: obj1[item] };
+      const newAcc = { ...acc, ...newProperty };
+      return newAcc;
+    }
+    const newProperty = {
+      [`- ${item}`]: _.isObject(obj1[item]) ? createDiffObject(obj1[item]) : obj1[item],
+      [`+ ${item}`]: _.isObject(obj2[item]) ? createDiffObject(obj2[item]) : obj2[item],
+    };
+    const newAcc = { ...acc, ...newProperty };
+    return newAcc;
   }, {});
   return resObj;
 };

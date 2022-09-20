@@ -1,20 +1,16 @@
 import stylish from './stylish.js';
 import plain from './plain.js';
 
-const getFormatter = (obj, formatterName) => {
-  try {
-    switch (formatterName) {
-      case 'plain':
-        return plain(obj);
-      case 'json':
-        return JSON.stringify(obj);
-      case 'stylish':
-        return stylish(obj, ' ', 2);
-      default:
-        throw new SyntaxError(`"${formatterName}" format is not supported`);
-    }
-  } catch (err) {
-    return console.log(err.message);
+const getFormatter = (diffObject, formatName) => {
+  switch (formatName) {
+    case 'plain':
+      return plain(diffObject);
+    case 'json':
+      return JSON.stringify(diffObject);
+    case 'stylish':
+      return stylish(diffObject, ' ', 2);
+    default:
+      throw new SyntaxError(`"${formatName}" format is not supported`);
   }
 };
 
