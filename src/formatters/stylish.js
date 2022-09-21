@@ -10,7 +10,7 @@ const stylish = (object, replacer = ' ', spaceCount = 1) => {
     const line = entries.reduce((acc, [key, value]) => {
       const { data, newData, type } = value;
       if (type === 'added') {
-        return [...acc,`${indent}+ ${key}: ${iter(data, depth + 1)}`];
+        return [...acc, `${indent}+ ${key}: ${iter(data, depth + 1)}`];
       }
       if (type === 'deleted') {
         return [...acc, `${indent}- ${key}: ${iter(data, depth + 1)}`];
@@ -23,12 +23,9 @@ const stylish = (object, replacer = ' ', spaceCount = 1) => {
         const val2 = `${indent}+ ${key}: ${iter(newData, depth + 1)}`;
         return [...acc, val1, val2];
       }
-      if (type === 'unchanged') {
-        return [...acc, `${indent}  ${key}: ${iter(data, depth + 1)}`];
-      }
-      return acc;
+      return [...acc, `${indent}  ${key}: ${iter(data, depth + 1)}`];
     }, []);
-    return ['{', ...line, bracketIndent, '}'].join('\n');
+    return ['{', ...line, `${bracketIndent}}`].join('\n');
   };
   return iter(object, 1);
 };

@@ -15,9 +15,9 @@ const plain = (object) => {
     const entries = Object.entries(currObj);
 
     const linesArr = entries.reduce((acc, [key, value]) => {
-      const currentKey = key;
+      // const currentKey = key;
       const { data, newData, type } = value;
-      const newPathKey = `${pathKey}.${currentKey}`;
+      const newPathKey = `${pathKey}.${key}`;
 
       switch (type) {
         case 'added':
