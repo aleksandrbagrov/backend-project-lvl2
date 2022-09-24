@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import parse from './parsers.js';
 import getFormatted from './formatters/index.js';
-import createDiffObject from './treeBuilder';
+import createDiffObject from './treeBuilder.js';
 
 const getDoc = (filepath) => {
   const absolutePath = path.resolve(process.cwd(), filepath);
@@ -17,9 +17,9 @@ const genDiff = (filepath1, filepath2, styleFormat = 'stylish') => {
   const doc2 = getDoc(filepath2);
   const doc2ToObj = parse(doc2, getFileExtension(filepath2));
 
-  const obj1_2DiffObj = createDiffObject(doc1ToObj, doc2ToObj);
+  const diffBeweenObj1Obj1 = createDiffObject(doc1ToObj, doc2ToObj);
 
-  return getFormatted(obj1_2DiffObj, styleFormat);
+  return getFormatted(diffBeweenObj1Obj1, styleFormat);
 };
 
 export default genDiff;
