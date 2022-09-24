@@ -15,7 +15,6 @@ const plain = (object) => {
     const entries = Object.entries(currObj);
 
     const linesArr = entries.reduce((acc, [key, value]) => {
-      // const currentKey = key;
       const { data, newData, type } = value;
       const newPathKey = `${pathKey}.${key}`;
 

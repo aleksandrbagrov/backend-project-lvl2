@@ -53,12 +53,12 @@ console.log(diff);
 # Demonstration of the work 
 
 ### The result of the program on the example of two flat (only key-value) json files: https://asciinema.org/a/UkA9UaCjqlAxF5dU4Coo8UN0Y
-![Asciinema - genDiff on the example of two plain (only key-value) json files](https://user-images.githubusercontent.com/101454330/175929374-4dae58d0-3c3d-4af2-946e-7e66d7d6f066.png)
+[![asciicast](https://asciinema.org/a/UkA9UaCjqlAxF5dU4Coo8UN0Y.svg)](https://asciinema.org/a/UkA9UaCjqlAxF5dU4Coo8UN0Y)
 ### The result of the program on the example of two flat (only key-value) yml(yaml) files: https://asciinema.org/a/0czjwAnoj4GY2Ae5vJLKQqo1C
-![Asciinema - genDiff on the example of two plain (only key-value) yml(yaml) files](https://user-images.githubusercontent.com/101454330/180446379-e4e9ced6-274c-4497-ae89-392ba3570ac9.png)
+[![asciicast](https://asciinema.org/a/0czjwAnoj4GY2Ae5vJLKQqo1C.svg)](https://asciinema.org/a/0czjwAnoj4GY2Ae5vJLKQqo1C)
 ### Example of generation of differences for files with nested structures in stylish format: https://asciinema.org/a/ivZcfFDEpMaZliVg2OL4RPB6q
-![Asciinema - Example of generation of differences for files with nested structures](https://user-images.githubusercontent.com/101454330/184117179-ff504444-0db3-43f8-a2ee-60fa6fbb7247.png)
+[![asciicast](https://asciinema.org/a/ivZcfFDEpMaZliVg2OL4RPB6q.svg)](https://asciinema.org/a/ivZcfFDEpMaZliVg2OL4RPB6q)
 ### Example of generation of differences for files with nested structures in plain format: https://asciinema.org/a/Qz3g9eof2GYwwJaqCLvQJVOyC
-![Asciinema - genDiff of two recursive json files in plain formatt](https://user-images.githubusercontent.com/101454330/186977617-9c99f65a-e238-4c93-9806-f6df8ceb0568.png)
+[![asciicast](https://asciinema.org/a/Qz3g9eof2GYwwJaqCLvQJVOyC.svg)](https://asciinema.org/a/Qz3g9eof2GYwwJaqCLvQJVOyC)
 ### Example of generation of differences for files with nested structures in json format: https://asciinema.org/a/g6mXSLpfjqNvqVIgnmEnhbiOX
-![Asciinema - genDiff of two recursive json files in json format](https://user-images.githubusercontent.com/101454330/189376774-c5998f8b-97f9-48e7-b7d7-15d4b9337427.png)
+[![asciicast](https://asciinema.org/a/g6mXSLpfjqNvqVIgnmEnhbiOX.svg)](https://asciinema.org/a/g6mXSLpfjqNvqVIgnmEnhbiOX)
